@@ -79,7 +79,8 @@ def add_images(cards):
             match2 = re.search(mythic_pattern.format(
                 (c['altname']).lower().replace(' ','')
                                       .replace('&#x27;','')
-                                      .replace('-','')), text2, re.DOTALL)
+                                      .replace('-','')
+                                      .replace('\'','')), text2, re.DOTALL)
             if match2:
                 c['img'] = (match2.group(0)
                         .replace('src="','http://mythicspoiler.com/')
