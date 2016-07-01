@@ -116,13 +116,12 @@ def make_xml(cards):
         print """
 <card>
 	<name>{name}</name>
-    <set picURL="{img}">EMN</set>
+    <set rarity="{rarity}" picURL="{img}">EMN</set>
     <color>{color}</color>
     <manacost>{cost}</manacost>
     <cmc>{cmc}</cmc>
     <type>{type}</type> 
     <pt>{pow}</pt>
-    <rarity>{rarity}</rarity>
     <tablerow>2</tablerow>
     <text>{rules}</text>
         """.format(**card)
