@@ -69,8 +69,8 @@ def add_images(cards):
     text = requests.get(IMAGES).text
     text2 = requests.get(IMAGES2).text
     
-    wotc_pattern = r'<img alt="{}.*?" src="(?P<img>.*?\.png)"'
-    mythic_pattern = r' src="emn/cards/{}.*?.jpg">'
+    wotc_pattern = r'<img alt="{}" src="(?P<img>.*?\.png)"'
+    mythic_pattern = r' src="emn/cards/{}.jpg">'
     for c in cards:
         match = re.search(wotc_pattern.format(c['name']), text, re.DOTALL)
         if match:
@@ -80,10 +80,20 @@ def add_images(cards):
                 (c['altname']).lower().replace(' ','')
                                       .replace('&#x27;','')
                                       .replace('-','')), text2, re.DOTALL)
+            match3 = re.search(mythic_pattern.format(
+                (c['name']).lower().replace(' ','')
+                                      .replace('&#x27;','')
+                                      .replace('-','')
+                                      .replace(',','')), text2, re.DOTALL)
             if match2:
                 c['img'] = (match2.group(0)
-                        .replace('src="','http://mythicspoiler.com/')
+                        .replace(' src="','http://mythicspoiler.com/')
                         .replace('">',''))
+            elif match3:
+                c['img'] = (match3.group(0)
+                        .replace(' src="','http://mythicspoiler.com/')
+                        .replace('">',''))
+
 def make_xml(cards):
     print """<cockatrice_carddatabase version="3">
     <sets>
