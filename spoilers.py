@@ -25,7 +25,8 @@ patterns = ['<b>Name:</b> <b>(?P<name>.*?)<',
             'Cost: (?P<cost>\d{0,2}[WUBRGC]*?)<',
             'Type: (?P<type>.*?)<',
             'Pow/Tgh: (?P<pow>.*?)<',
-            'Rules Text: (?P<rules>.*?)<br /'
+            'Rules Text: (?P<rules>.*?)<br /',
+            'Rarity: (?P<rarity>.*?)<'
             ]
 
 def get_cards():
@@ -35,7 +36,7 @@ def get_cards():
     cards = []
     for entry in d.items()[5][1]:
         card = dict(cost='',cmc='',img='',pow='',name='',rules='',type='',
-                color='', altname='')
+                color='', altname='', rarity='')
         summary = entry['summary']
         for pattern in patterns:
             match = re.search(pattern, summary, re.MULTILINE|re.DOTALL)
@@ -125,7 +126,7 @@ def make_xml(cards):
         print """
 <card>
 	<name>{name}</name>
-    <set picURL="{img}">EMN</set>
+    <set rarity="{rarity}" picURL="{img}">EMN</set>
     <color>{color}</color>
     <manacost>{cost}</manacost>
     <cmc>{cmc}</cmc>
