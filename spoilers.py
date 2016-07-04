@@ -100,8 +100,8 @@ def make_xml(cards):
         <set>
             <name>EMN</name>
             <longname>Eldritch Moon</longname>
-            <settype>Custom</settype>
-            <releasedate></releasedate>
+            <settype>Expansion</settype>
+            <releasedate>2016-07-22</releasedate>
         </set>
     </sets>
     <cards>
